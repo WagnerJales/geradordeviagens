@@ -36,31 +36,7 @@ with col2:
 # Mostrar resultados para todos os modelos
 if ur > 0:
     for nome_modelo, modelo in modelos.items():
-        st.markdown(f"### 📘 {nome_modelo}")
-
-        key = "manha" if pico == "Manhã" else "tarde"
-        param = modelo[key]
-        coef, const = param["coef"], param["const"]
-        atracao_pct, producao_pct = param["atracao"], param["producao"]
-        modais = param["modais"]
-
-        viagens = int(round(coef * ur + const))
-        atracao = int(round(viagens * atracao_pct))
-        producao = int(round(viagens * producao_pct))
-
-        col1, col2 = st.columns(2)
-        with col1:
-            st.write(f"**Total de viagens no pico da {pico.lower()}**: {viagens:,d}")
-            st.write(f"**Atração**: {atracao:,d} viagens ({atracao_pct*100:.0f}%)")
-            st.write(f"**Produção**: {producao:,d} viagens ({producao_pct*100:.0f}%)")
-        with col2:
-            st.write("**🚲 Divisão Modal**")
-            for modo, pct in modais.items():
-                qtd = int(round(viagens * pct))
-                st.write(f"- {modo}: {qtd:,d} viagens ({pct*100:.1f}%)")
-else:
-    st.info("Insira um valor de UR maior que 0.")
-
+        
 st.markdown("""
 ---
 
@@ -71,4 +47,3 @@ Trânsito, Santos, SP.
 
 👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
-
