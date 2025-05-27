@@ -41,7 +41,7 @@ if ur > 0:
     with col1:
         st.subheader("📈 Resultados")
         st.write(f"**Total de viagens no pico da {pico.lower()}**: {viagens:,d}")
-
+        
         atracao = int(round(viagens * atracao_pct))
         producao = int(round(viagens * producao_pct))
 
@@ -55,3 +55,15 @@ if ur > 0:
             st.write(f"- {modo}: {qtd:,d} viagens ({pct*100:.1f}%)")
 else:
     st.info("Insira um valor de UR maior que 0.")
+
+# Rodapé com bibliografia e autoria
+st.markdown("""
+---
+
+📚 **Referência Bibliográfica**  
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para  
+condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
+Trânsito, Santos, SP.
+
+👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
+""")
