@@ -1,12 +1,16 @@
 import streamlit as st
 
-st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="centered")
+st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
 st.title("🚦 Calculadora de Geração de Viagens")
 
-# Entrada do usuário
-ur = st.number_input("Digite o número de Unidades Residenciais (UR):", min_value=0.0, step=1.0)
-pico = st.selectbox("Selecione a Hora-Pico:", ["Manhã", "Tarde"])
+# Layout em colunas para entradas
+col1, col2 = st.columns(2)
+
+with col1:
+    ur = st.number_input("Digite o número de Unidades Residenciais (UR):", min_value=0, step=1, format="%d")
+with col2:
+    pico = st.selectbox("Selecione a Hora-Pico:", ["Manhã", "Tarde"])
 
 # Definir parâmetros com base no pico
 if pico == "Manhã":
@@ -29,21 +33,25 @@ else:
     }
 
 # Cálculo de viagens
-viagens = coef * ur + const
+viagens = int(round(coef * ur + const))
 
 if ur > 0:
-    st.subheader("📈 Resultados")
-    st.write(f"**Total de viagens no pico da {pico.lower()}**: {viagens:.2f}")
+    col1, col2 = st.columns(2)
 
-    atracao = viagens * atracao_pct
-    producao = viagens * producao_pct
+    with col1:
+        st.subheader("📈 Resultados")
+        st.write(f"**Total de viagens no pico da {pico.lower()}**: {viagens:,d}")
 
-    st.write(f"**Atração**: {atracao:.2f} viagens ({atracao_pct*100:.0f}%)")
-    st.write(f"**Produção**: {producao:.2f} viagens ({producao_pct*100:.0f}%)")
+        atracao = int(round(viagens * atracao_pct))
+        producao = int(round(viagens * producao_pct))
 
-    st.markdown("### 🚲 Divisão Modal")
-    for modo, pct in modais.items():
-        qtd = viagens * pct
-        st.write(f"- {modo}: {qtd:.2f} viagens ({pct*100:.1f}%)")
+        st.write(f"**Atração**: {atracao:,d} viagens ({atracao_pct*100:.0f}%)")
+        st.write(f"**Produção**: {producao:,d} viagens ({producao_pct*100:.0f}%)")
+
+    with col2:
+        st.subheader("🚲 Divisão Modal")
+        for modo, pct in modais.items():
+            qtd = int(round(viagens * pct))
+            st.write(f"- {modo}: {qtd:,d} viagens ({pct*100:.1f}%)")
 else:
     st.info("Insira um valor de UR maior que 0.")
