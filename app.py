@@ -3,7 +3,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
-st.title("🚦 Calculadora de Geração de Viagens")
+st.title("🚦 Calculadora de Geração de Viagens Condominios Residenciais")
 
 # Modelos disponíveis
 modelos = {
