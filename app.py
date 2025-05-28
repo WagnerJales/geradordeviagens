@@ -55,11 +55,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Entradas do usuário
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1, 1])
 with col1:
-    ur = st.number_input("Digite o número de Unidades Residenciais (UR):", min_value=0, step=1, format="%d")
+    st.markdown("#### Digite o número de Unidades Residenciais (UR):")
+    ur = st.number_input("", min_value=0, step=1, format="%d", key="ur_input")
 with col2:
-    pico = st.selectbox("Selecione a Hora-Pico:", ["Manhã", "Tarde"])
+    pico = st.radio("Selecione a Hora-Pico:", ["Manhã", "Tarde"], horizontal=True)
+
 
 # Mostrar resultados para todos os modelos
 if ur > 0:
