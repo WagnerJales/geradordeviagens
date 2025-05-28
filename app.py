@@ -6,23 +6,23 @@ st.title("🚦 Calculadora de Geração de Viagens")
 
 # Modelos disponíveis
 modelos = {
-    "Padrão (Oliveira & Rodrigues, 2015)": {
+    "Modelo OLIVEIRA (2015)": {
         "manha": {"coef": 0.7562, "const": -35.147, "atracao": 0.18, "producao": 0.82,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
         "tarde": {"coef": 0.7932, "const": -22.36, "atracao": 0.61, "producao": 0.39,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Residencial (Betim-MG) – ImTraff (2015)": {
-        "manha": {"coef": 0.74, "const": 0, "atracao": 0.18, "producao": 0.82,
+    "Modelo BHTRANS (2017)": {
+        "manha": {"coef": 0.74, "const": 0, "atracao": 0.10, "producao": 0.90,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
-        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.61, "producao": 0.39,
+        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.70, "producao": 0.30,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Residencial (Vitória-ES) – ANTP (2015)": {
+    "Modelo FERREIRA (2013)": {
         "manha": {"coef": 0.3627, "const": 165.2988, "atracao": 0.18, "producao": 0.82,
-                  "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
+                  "modais": {"Auto": 0.40, "Moto": 0.12, "Ônibus": 0.040, "A pé": 0.44}},
         "tarde": {"coef": 0.3627, "const": 165.2988, "atracao": 0.61, "producao": 0.39,
-                  "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
+                  "modais": {"Auto": 0.40, "Moto": 0.12, "Ônibus": 0.040, "A pé": 0.44}}
     }
 }
 
@@ -79,10 +79,9 @@ st.markdown("""
 ---
 
 📚 **Referência Bibliográfica**  
-Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para  
-condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
 Trânsito, Santos, SP.
 
-👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
+👨‍💻 **Adaptado por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
 
