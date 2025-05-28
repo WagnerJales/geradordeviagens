@@ -76,7 +76,7 @@ modelos = {
 # Entradas do usuário
 col1, col2 = st.columns(2)
 with col1:
-    ur = st.number_input("URs:", min_value=0, step=1, format="%d")
+    ur = st.number_input("Unidades Residenciais:", min_value=0, step=1, format="%d")
 with col2:
     pico = st.radio("Hora-Pico:", ["Manhã", "Tarde"], horizontal=True)
 
