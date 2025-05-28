@@ -108,9 +108,7 @@ st.markdown("""
 ---
 
 📚 **Referência Bibliográfica Principal**  
-Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para  
-condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
-Trânsito, Santos, SP.
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e   Trânsito, Santos, SP.
 
 *Observação: Os dados dos modelos de Betim-MG e Vitória-ES são ilustrativos e baseados em diferentes fontes, adaptados para este exemplo.*
 
