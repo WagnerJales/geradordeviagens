@@ -5,11 +5,11 @@ from PIL import Image
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
 # Logomarca centralizada
-col_logo = st.columns([1, 3, 1])
-with col_logo[1]:
-    st.image("logomarca.png", width=200)
+col_logo = st.columns([2, 6])
+with col_logo[0]:
+    st.image("logomarca.png", width=150)
 
-st.title("🚦 Calculadora de Geração de Viagens Condominios Residenciais")
+st.title("Calculadora de Geração de Viagens Condominios Residenciais")
 
 # Estilo customizado
 st.markdown("""
