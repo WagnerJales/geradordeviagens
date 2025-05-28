@@ -13,7 +13,7 @@ with col_logo[0]:
 st.markdown("""
     <style>
         h1, h2, h3 {
-            font-size: 95% !important;
+            font-size: 110% !important;
         }
         .stMetric {
             font-size: 1.2em !important;
