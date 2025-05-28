@@ -26,6 +26,29 @@ modelos = {
     }
 }
 
+# Estilo personalizado para ajuste de fontes e inputs
+st.markdown("""
+    <style>
+        h1, h2, h3 {
+            font-size: 1.3em !important;
+        }
+        .css-1cpxqw2, .css-ffhzg2 {
+            font-size: 130% !important;
+        }
+        td, th {
+            font-size: 1.1rem !important;
+        }
+        input[type="number"], .stNumberInput input {
+            height: 3em !important;
+            font-size: 1.3em !important;
+        }
+        div[data-baseweb="select"] {
+            height: 3em !important;
+            font-size: 1.2em !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Estilo personalizado para ajuste de fontes
 st.markdown("""
     <style>
