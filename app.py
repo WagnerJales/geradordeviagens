@@ -5,7 +5,7 @@ from PIL import Image
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
 # Logomarca esquerda
- st.image("logomarca.png", width=300)
+st.image("logomarca.png", width=300)
 
 # Ajuste textos
 st.markdown("""
