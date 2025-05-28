@@ -30,7 +30,7 @@ modelos = {
 st.markdown("""
     <style>
         h1, h2, h3 {
-            font-size: 1.1em !important;
+            font-size: 1.3em !important;
         }
         .css-1cpxqw2, .css-ffhzg2 {
             font-size: 130% !important;
