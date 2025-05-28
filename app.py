@@ -44,12 +44,11 @@ st.markdown("""
             font-size: 1.1rem !important;
         }
         input[type="number"], .stNumberInput input {
-            height: 3em !important;
-            font-size: 1.3em !important;
-        }
-        div[data-baseweb="select"] {
-            height: 3em !important;
+            width: 6em !important;
             font-size: 1.2em !important;
+        }
+        div[data-baseweb="select"], div[data-baseweb="radio"] {
+            font-size: 1.1em !important;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -62,10 +61,14 @@ with col1:
 with col2:
     pico = st.radio("Selecione a Hora-Pico:", ["Manhã", "Tarde"], horizontal=True)
 
-
 # Mostrar resultados para todos os modelos
 if ur > 0:
     col1, col2 = st.columns([2, 1])
+
+    with col2:
+        imagem = Image.open("condominio.png")
+        st.image(imagem, use_container_width=True)
+
     with col1:
         for nome_modelo, modelo in modelos.items():
             st.markdown(f"### 📘 {nome_modelo}")
@@ -90,9 +93,6 @@ if ur > 0:
                 for modo, pct in modais.items():
                     qtd = int(round(viagens * pct))
                     st.write(f"- {modo}: {qtd:,d} viagens ({pct*100:.1f}%)")
-    with col2:
-        imagem = Image.open("condominio.png")
-        st.image(imagem, use_column_width=True)
 
 # Rodapé
 st.markdown("""
