@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
-st.title("🚦 Calculadora de Geração de Viagens")
+st.title("🚦 Calculadora de Geração de Viagens para Edificios residenciais de classe média")
 
 # Modelos disponíveis
 modelos = {
@@ -79,8 +79,7 @@ st.markdown("""
 ---
 
 📚 **Referência Bibliográfica**  
-Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
-Trânsito, Santos, SP.
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e   Trânsito, Santos, SP.
 
 👨‍💻 **Adaptado por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
