@@ -1,58 +1,31 @@
 import streamlit as st
-from PIL import Image
+import pandas as pd
 
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
-# Logomarca no topo
-logomarca = Image.open("logomarca.png")
-st.image(logomarca, width=200)
-
-st.title("🚦 Calculadora de Geração de Viagens para Edifícios residenciais de classe média")
+st.title("🚦 Calculadora de Geração de Viagens")
 
 # Modelos disponíveis
 modelos = {
-    "Modelo OLIVEIRA (2015)": {
+    "Padrão (Oliveira & Rodrigues, 2015)": {
         "manha": {"coef": 0.7562, "const": -35.147, "atracao": 0.18, "producao": 0.82,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
         "tarde": {"coef": 0.7932, "const": -22.36, "atracao": 0.61, "producao": 0.39,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Modelo BHTRANS (2017)": {
-        "manha": {"coef": 0.74, "const": 0, "atracao": 0.10, "producao": 0.90,
+    "Residencial (Betim-MG) – ImTraff (2015)": {
+        "manha": {"coef": 0.74, "const": 0, "atracao": 0.18, "producao": 0.82,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
-        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.70, "producao": 0.30,
+        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.61, "producao": 0.39,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Modelo FERREIRA (2013)": {
+    "Residencial (Vitória-ES) – ANTP (2015)": {
         "manha": {"coef": 0.3627, "const": 165.2988, "atracao": 0.18, "producao": 0.82,
-                  "modais": {"Auto": 0.40, "Moto": 0.12, "Ônibus": 0.040, "A pé": 0.44}},
+                  "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
         "tarde": {"coef": 0.3627, "const": 165.2988, "atracao": 0.61, "producao": 0.39,
-                  "modais": {"Auto": 0.40, "Moto": 0.12, "Ônibus": 0.040, "A pé": 0.44}}
+                  "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     }
 }
-
-# Estilo personalizado
-st.markdown("""
-    <style>
-        h1, h2, h3 {
-            font-size: 1.3em !important;
-        }
-        .css-1cpxqw2, .css-ffhzg2 {
-            font-size: 130% !important;
-        }
-        td, th {
-            font-size: 1.1rem !important;
-        }
-        input[type="number"], .stNumberInput input {
-            height: 3em !important;
-            font-size: 1.3em !important;
-        }
-        div[data-baseweb="select"] {
-            height: 3em !important;
-            font-size: 1.2em !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 # Entradas do usuário
 col1, col2 = st.columns(2)
@@ -61,44 +34,86 @@ with col1:
 with col2:
     pico = st.selectbox("Selecione a Hora-Pico:", ["Manhã", "Tarde"])
 
+# Mapear seleção do pico para chave do dicionário
+pico_key = "manha" if pico == "Manhã" else "tarde"
+
 # Mostrar resultados para todos os modelos
 if ur > 0:
-    col1, col2 = st.columns([2, 1])
-    with col1:
-        for nome_modelo, modelo in modelos.items():
-            st.markdown(f"### 📘 {nome_modelo}")
+    st.markdown("---")
+    st.header(f"Resultados para {ur} UR na Hora-Pico da {pico}")
 
-            key = "manha" if pico == "Manhã" else "tarde"
-            param = modelo[key]
-            coef, const = param["coef"], param["const"]
-            atracao_pct, producao_pct = param["atracao"], param["producao"]
-            modais = param["modais"]
+    resultados_gerais = []
 
-            viagens = int(round(coef * ur + const))
-            atracao = int(round(viagens * atracao_pct))
-            producao = int(round(viagens * producao_pct))
+    for nome_modelo, modelo in modelos.items():
+        st.subheader(f"Modelo: {nome_modelo}")
 
-            c1, c2 = st.columns(2)
-            with c1:
-                st.write(f"**Total de viagens no pico da {pico.lower()}**: {viagens:,d}")
-                st.write(f"**Atração**: {atracao:,d} viagens ({atracao_pct*100:.0f}%)")
-                st.write(f"**Produção**: {producao:,d} viagens ({producao_pct*100:.0f}%)")
-            with c2:
-                st.write("**🚲 Divisão Modal**")
-                for modo, pct in modais.items():
-                    qtd = int(round(viagens * pct))
-                    st.write(f"- {modo}: {qtd:,d} viagens ({pct*100:.1f}%)")
-    with col2:
-        imagem = Image.open("condominio.png")
-        st.image(imagem, use_column_width=True)
+        # Verificar se o pico selecionado existe no modelo
+        if pico_key in modelo:
+            params = modelo[pico_key]
+            
+            # Calcular viagens totais
+            total_viagens = params["coef"] * ur + params["const"]
+            total_viagens = max(0, round(total_viagens)) # Garantir que não seja negativo e arredondar
 
-# Rodapé
+            # Calcular atração e produção
+            atracao_viagens = round(total_viagens * params["atracao"])
+            producao_viagens = round(total_viagens * params["producao"])
+
+            # Exibir resultados principais
+            col_res1, col_res2, col_res3 = st.columns(3)
+            with col_res1:
+                st.metric(label="Total de Viagens Geradas", value=f"{total_viagens}")
+            with col_res2:
+                st.metric(label="Viagens Atraídas", value=f"{atracao_viagens} ({params['atracao']:.1%})")
+            with col_res3:
+                st.metric(label="Viagens Produzidas", value=f"{producao_viagens} ({params['producao']:.1%})")
+
+            # Calcular e exibir divisão modal
+            st.write("**Divisão Modal Estimada:**")
+            modais_data = []
+            for modal, percentual in params["modais"].items():
+                viagens_modal = round(total_viagens * percentual)
+                modais_data.append({"Modo": modal, "Viagens": viagens_modal, "Percentual": f"{percentual:.1%}"})
+            
+            df_modais = pd.DataFrame(modais_data)
+            st.dataframe(df_modais.set_index('Modo'), use_container_width=True)
+
+            # Adicionar aos resultados gerais para o resumo
+            resultados_gerais.append({
+                "Modelo": nome_modelo,
+                "Total Viagens": total_viagens,
+                "Atração": atracao_viagens,
+                "Produção": producao_viagens,
+                "Auto": round(total_viagens * params["modais"]["Auto"]),
+                "Moto": round(total_viagens * params["modais"]["Moto"]),
+                "Ônibus": round(total_viagens * params["modais"]["Ônibus"]),
+                "A pé": round(total_viagens * params["modais"]["A pé"])
+            })
+
+        else:
+            st.warning(f"Dados para a hora-pico '{pico}' não disponíveis para o modelo {nome_modelo}.")
+        st.markdown("&nbsp;") # Adiciona um espaço
+
+    # Tabela Resumo Comparativa
+    if resultados_gerais:
+        st.markdown("---")
+        st.header("Resumo Comparativo dos Modelos")
+        df_resumo = pd.DataFrame(resultados_gerais)
+        st.dataframe(df_resumo.set_index('Modelo'), use_container_width=True)
+
+else:
+    st.info("Por favor, insira um número de Unidades Residenciais (UR) maior que zero para calcular.")
+
 st.markdown("""
 ---
 
-📚 **Referência Bibliográfica**  
-Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*.  
-In Anais 20º Congresso Brasileiro de Transporte e Trânsito, Santos, SP.
+📚 **Referência Bibliográfica Principal**  
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para  
+condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e  
+Trânsito, Santos, SP.
 
-👨‍💻 **Adaptado por [Wagner Jales](http://www.wagnerjales.com.br)**
+*Observação: Os dados dos modelos de Betim-MG e Vitória-ES são ilustrativos e baseados em diferentes fontes, adaptados para este exemplo.*
+
+👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
+
