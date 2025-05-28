@@ -4,10 +4,25 @@ from PIL import Image
 
 st.set_page_config(page_title="Calculadora de Geração de Viagens", layout="wide")
 
-# Logomarca centralizada
+# Logomarca esquerda
 col_logo = st.columns([2, 6])
 with col_logo[0]:
     st.image("logomarca.png", width=150)
+
+# Ajuste textos
+st.markdown("""
+    <style>
+        h1, h2, h3 {
+            font-size: 70% !important;
+        }
+        .stMetric {
+            font-size: 1.2em !important;
+        }
+        .stDataFrame, .stMarkdown p {
+            font-size: 1.2em !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 st.title("Calculadora de Geração de Viagens Condominios Residenciais")
 
@@ -126,8 +141,7 @@ st.markdown("""
 ---
 
 📚 **Referência Bibliográfica Principal**  
-Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*.  
-In Anais 20º Congresso Brasileiro de Transporte e Trânsito, Santos, SP.
+Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e Trânsito, Santos, SP.
 
 👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
