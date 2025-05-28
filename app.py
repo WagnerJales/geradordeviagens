@@ -84,6 +84,9 @@ with col2:
 
 pico_key = "manha" if pico == "Manhã" else "tarde"
 
+# Mostrar imagem do condomínio sempre
+st.columns([2, 1])[1].image("condominio.png", use_container_width=True)
+
 # Mostrar resultados
 if ur > 0:
     col_result, col_img = st.columns([2, 1])
