@@ -7,23 +7,23 @@ st.title("🚦 Calculadora de Geração de Viagens")
 
 # Modelos disponíveis
 modelos = {
-    "Padrão (Oliveira & Rodrigues, 2015)": {
+    "OLIVEIRA (2015)": {
         "manha": {"coef": 0.7562, "const": -35.147, "atracao": 0.18, "producao": 0.82,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
         "tarde": {"coef": 0.7932, "const": -22.36, "atracao": 0.61, "producao": 0.39,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Residencial (Betim-MG) – ImTraff (2015)": {
-        "manha": {"coef": 0.74, "const": 0, "atracao": 0.18, "producao": 0.82,
+    "BHTRANS (2015)": {
+        "manha": {"coef": 0.74, "const": 0, "atracao": 0.1, "producao": 0.9,
                   "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
-        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.61, "producao": 0.39,
+        "tarde": {"coef": 0.4601, "const": 0, "atracao": 0.7, "producao": 0.3,
                   "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
     },
-    "Residencial (Vitória-ES) – ANTP (2015)": {
+    "FERREIRA (2013)": {
         "manha": {"coef": 0.3627, "const": 165.2988, "atracao": 0.18, "producao": 0.82,
-                  "modais": {"Auto": 0.321, "Moto": 0.049, "Ônibus": 0.204, "A pé": 0.426}},
+                  "modais": {"Auto": 0.4, "Moto": 0.12, "Ônibus": 0.04, "A pé": 0.44}},
         "tarde": {"coef": 0.3627, "const": 165.2988, "atracao": 0.61, "producao": 0.39,
-                  "modais": {"Auto": 0.356, "Moto": 0.053, "Ônibus": 0.151, "A pé": 0.44}}
+                  "modais": {"Auto": 0.4, "Moto": 0.12, "Ônibus": 0.04, "A pé": 0.44}}
     }
 }
 
@@ -109,8 +109,6 @@ st.markdown("""
 
 📚 **Referência Bibliográfica Principal**  
 Oliveira, P., Rodrigues, F. (2015, junho). *Calibração de modelo de geração de viagens para condomínios de edifícios residenciais*. In Anais 20º Congresso Brasileiro de Transporte e   Trânsito, Santos, SP.
-
-*Observação: Os dados dos modelos de Betim-MG e Vitória-ES são ilustrativos e baseados em diferentes fontes, adaptados para este exemplo.*
 
 👨‍💻 **Desenvolvido por [Wagner Jales](http://www.wagnerjales.com.br)**
 """)
